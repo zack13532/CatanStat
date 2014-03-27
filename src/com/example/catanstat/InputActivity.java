@@ -17,6 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class InputActivity extends FragmentActivity implements
@@ -150,7 +154,7 @@ public class InputActivity extends FragmentActivity implements
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
-	public static class DummySectionFragment extends Fragment {
+	public static class DummySectionFragment extends Fragment implements OnItemSelectedListener {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -165,11 +169,31 @@ public class InputActivity extends FragmentActivity implements
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_input_dummy,
 					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+			Spinner diceSpinner = (Spinner) rootView.findViewById(R.id.dicespinner);
+			// Create an ArrayAdapter using the string array and a default spinner layout
+			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.dicerolls,
+					android.R.layout.simple_spinner_item);
+			// Specify the layout to use when the list of choices appears
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			// Apply the adapter to the spinner
+			diceSpinner.setAdapter(adapter);
+			
+			// Set Item Listener
+			diceSpinner.setOnItemSelectedListener(this);
+			
 			return rootView;
+		}
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view,
+				int position, long id) {
+			parent.setSelection(position);
+			
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+			// Do nothing
 		}
 	}
 
