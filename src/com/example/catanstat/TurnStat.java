@@ -4,7 +4,7 @@ package com.example.catanstat;
 /**
  * 
  * @author Zack
- * @description Vector for representing the stored statistics
+ * @description Array for representing the stored statistics
  * 				for a single turn for a single player
  */
 public class TurnStat {
@@ -14,11 +14,11 @@ public class TurnStat {
 	private static final int NUM_STATS = 8;
 	
 	//locations of each statistic in the vector
-	private static final int BRICK_IDX = 0;
-	private static final int ORE_IDX = 1;
-	private static final int SHEEP_IDX = 2;
-	private static final int WHEAT_IDX = 3;
-	private static final int WOOD_IDX = 4;
+	private static final int BRICK_IDX = Resource.BRICK.ordinal();
+	private static final int ORE_IDX = Resource.ORE.ordinal();
+	private static final int SHEEP_IDX = Resource.SHEEP.ordinal();
+	private static final int WHEAT_IDX = Resource.WHEAT.ordinal();
+	private static final int WOOD_IDX = Resource.WOOD.ordinal();
 	private static final int TOTAL_RES_IDX = 5;
 	private static final int DEVCARDS_IDX = 6;
 	private static final int KNIGHTS_IDX = 7;
