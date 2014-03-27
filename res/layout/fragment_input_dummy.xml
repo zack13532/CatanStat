@@ -13,17 +13,24 @@
         android:id="@+id/dicespinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dummy_fragment"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="44dp" />
-
-    <fragment
-        android:id="@+id/dummy_fragment"
-        android:name="com.example.fragmentexample.DummyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dicespinner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp" />
 
+    <TextView
+        android:id="@+id/turndisp"
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Turn 0" />
+
+    <Button
+        android:id="@+id/submitbutt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Submit" 
+        android:onClick="submitTurn" />
+    
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.catanstat;
 
 import java.util.Locale;
+import java.util.Vector;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -21,24 +22,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class InputActivity extends FragmentActivity{
 
 	
-	
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	ViewPager mViewPager;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
-
 	}
 
 	/**
@@ -46,28 +40,46 @@ public class InputActivity extends FragmentActivity{
 	 * displays dummy text.
 	 */
 	public static class DummySectionFragment extends Fragment implements OnItemSelectedListener {
+		
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
+		//current turn number
+		private int turnNum;
+		private TextView turnDisp;
+		private Vector<Integer> diceRollHist;
+		private Spinner diceSpinner;
+		
 		public DummySectionFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+			
+			turnNum = 1;
+			
 			View rootView = inflater.inflate(R.layout.fragment_input_dummy,
 					container, false);
-			Spinner diceSpinner = (Spinner) rootView.findViewById(R.id.dicespinner);
+			diceSpinner = (Spinner) rootView.findViewById(R.id.dicespinner);
 			// Create an ArrayAdapter using the string array and a default spinner layout
-			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.dicerolls,
+			ArrayAdapter<CharSequence> diceSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.dicerolls,
 					android.R.layout.simple_spinner_item);
 			// Specify the layout to use when the list of choices appears
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			diceSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			// Apply the adapter to the spinner
-			diceSpinner.setAdapter(adapter);
+			diceSpinner.setAdapter(diceSpinnerAdapter);
+
+			turnDisp = (TextView) rootView.findViewById(R.id.turndisp);
+			turnDisp.setText("Turn " + turnNum);
+			
+			Button submitButt = (Button) rootView.findViewById(R.id.submitbutt);
+			
+			//change this so it references a global constant variable instead of 20
+			diceRollHist = new Vector<Integer>(20);
 			
 			// Set Item Listener
 			diceSpinner.setOnItemSelectedListener(this);
@@ -75,6 +87,16 @@ public class InputActivity extends FragmentActivity{
 			return rootView;
 		}
 
+		
+		//called when the user clicks the Submit button
+		public void submitTurn(){
+			
+			diceRollHist.add(diceSpinner.getSelectedItemPosition()+2);
+			
+			turnNum++;
+			turnDisp.setText("Turn " + turnNum);
+		}
+		
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
