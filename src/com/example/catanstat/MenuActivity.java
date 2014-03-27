@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -28,6 +29,10 @@ public class MenuActivity extends FragmentActivity {
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
+			
+
+			Intent myIntent = new Intent(MenuActivity.this, InputActivity.class);
+			MenuActivity.this.startActivity(myIntent); 
 		}
 	}
 
@@ -78,20 +83,25 @@ public class MenuActivity extends FragmentActivity {
 			entryFour = (EditText) view.findViewById(R.id.player4);
 			
 			//button
-			Button submit = (Button) view.findViewById(R.id.submit);
-			submit.setText("Start");
+			Button submit = (Button) view.findViewById(R.id.add);
+			submit.setText("Add");
 			
 	        
 			//submit-button listener
 			submit.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
-	                buttonClicked(v);
+	               
+	            	/* sends action when button is clicked */
+	            	buttonClicked(v);
+
 	            }
 	        });
 	        
 			return view;
 		}
 		
+		// creates 4 new player objects and add them to singleton playerlist
+		// using the text field data as name of players
 		public void buttonClicked (View view) {
 			
 			String p1_name = entryOne.getText().toString();
@@ -103,6 +113,7 @@ public class MenuActivity extends FragmentActivity {
 			playerList.addPlayer(p2_name);
 			playerList.addPlayer(p3_name);
 			playerList.addPlayer(p4_name);
+			
 		}
 	}
 
