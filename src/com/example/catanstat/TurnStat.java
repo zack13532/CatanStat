@@ -1,6 +1,5 @@
 package com.example.catanstat;
 
-import java.util.Vector;
 
 /**
  * 
@@ -8,13 +7,11 @@ import java.util.Vector;
  * @description Vector for representing the stored statistics
  * 				for a single turn for a single player
  */
-public class TurnStat extends Vector<Integer> {
+public class TurnStat {
 	
-	private static final long serialVersionUID = 6683355534182892803L;
-
 	//number of types of statistics to keep track of:
-	//brick, ore, sheep, wood, wheat, # dev cards, knights used
-	private static final int NUM_STATS = 7;
+	//brick, ore, sheep, wood, wheat, total resources, # dev cards, knights used
+	private static final int NUM_STATS = 8;
 	
 	//locations of each statistic in the vector
 	private static final int BRICK_IDX = 0;
@@ -22,14 +19,18 @@ public class TurnStat extends Vector<Integer> {
 	private static final int SHEEP_IDX = 2;
 	private static final int WHEAT_IDX = 3;
 	private static final int WOOD_IDX = 4;
-	private static final int DEVCARDS_IDX = 5;
-	private static final int KNIGHTS_IDX = 6;
+	private static final int TOTAL_RES_IDX = 5;
+	private static final int DEVCARDS_IDX = 6;
+	private static final int KNIGHTS_IDX = 7;
+	
+	//actual array of statistics
+	private int[] statArray;
 	
 	//constructor for creating a vector to represent stats
 	public TurnStat() {
 		
-		//initialize the vector to be NUM_STATS size
-		super(NUM_STATS);
+		//initialize the array to be NUM_STATS size
+		statArray = new int[NUM_STATS];
 	} //end default constructor
 	
 	/**
@@ -38,11 +39,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getTotalRes() {
 		
-		return this.getBrick() +
-				this.getOre() +
-				this.getSheep() +
-				this.getWheat() +
-				this.getWood();
+		return statArray[TOTAL_RES_IDX];
 	}
 	
 	/**
@@ -51,7 +48,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getBrick() {
 		
-		return this.get(BRICK_IDX);
+		return statArray[BRICK_IDX];
 	} //end getBrick method
 
 	/**
@@ -60,7 +57,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getOre() {
 		
-		return this.get(ORE_IDX);
+		return statArray[ORE_IDX];
 	} //end getOre method
 
 	/**
@@ -69,7 +66,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getSheep() {
 		
-		return this.get(SHEEP_IDX);
+		return statArray[SHEEP_IDX];
 	} //end getSheep method
 
 	/**
@@ -78,7 +75,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getWheat() {
 		
-		return this.get(WHEAT_IDX);
+		return statArray[WHEAT_IDX];
 	} //end getWheat method
 
 	/**
@@ -87,7 +84,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getWood() {
 		
-		return this.get(WOOD_IDX);
+		return statArray[WOOD_IDX];
 	} //end getWood method
 
 	/**
@@ -96,7 +93,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public int getDevCards() {
 		
-		return this.get(DEVCARDS_IDX);
+		return statArray[DEVCARDS_IDX];
 	} //end getDevCards method
 
 	/**
@@ -105,7 +102,7 @@ public class TurnStat extends Vector<Integer> {
 	 */
 	public boolean getKnightUsed() {
 		
-		return this.get(KNIGHTS_IDX) != 0;
+		return statArray[KNIGHTS_IDX] != 0;
 	} //end getKnightUsed method
 	
 } //end TurnStat class
