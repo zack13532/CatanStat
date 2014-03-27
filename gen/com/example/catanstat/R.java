@@ -33,7 +33,6 @@ public final class R {
     }
     public static final class id {
         public static final int action_settings=0x7f09000a;
-        public static final int add=0x7f090009;
         public static final int container=0x7f090000;
         public static final int dicespinner=0x7f090001;
         public static final int editText1=0x7f090005;
@@ -41,6 +40,7 @@ public final class R {
         public static final int player2=0x7f090004;
         public static final int player3=0x7f090006;
         public static final int player4=0x7f090008;
+        public static final int submit=0x7f090009;
         public static final int submitbutt=0x7f090003;
         public static final int turndisp=0x7f090002;
     }

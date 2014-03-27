@@ -30,12 +30,14 @@ public class MenuActivity extends FragmentActivity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 			
-
-			Intent myIntent = new Intent(MenuActivity.this, InputActivity.class);
-			MenuActivity.this.startActivity(myIntent); 
 		}
 	}
-
+	
+	public void sendMessage(View view) 
+	{
+	    Intent intent = new Intent(MenuActivity.this, InputActivity.class);
+	    startActivity(intent);
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,7 +85,7 @@ public class MenuActivity extends FragmentActivity {
 			entryFour = (EditText) view.findViewById(R.id.player4);
 			
 			//button
-			Button submit = (Button) view.findViewById(R.id.add);
+			Button submit = (Button) view.findViewById(R.id.submit);
 			submit.setText("Add");
 			
 	        
