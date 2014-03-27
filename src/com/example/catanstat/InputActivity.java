@@ -26,6 +26,8 @@ import android.widget.TextView;
 
 public class InputActivity extends FragmentActivity{
 
+	
+	
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
