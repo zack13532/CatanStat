@@ -16,6 +16,11 @@ public final class R {
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
+         Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
+    
+
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
@@ -27,23 +32,33 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090002;
-        public static final int dicespinner=0x7f090001;
+        public static final int action_settings=0x7f09000a;
+        public static final int container=0x7f090001;
+        public static final int dicespinner=0x7f090002;
+        public static final int dummy_fragment=0x7f090003;
+        public static final int editText1=0x7f090005;
         public static final int pager=0x7f090000;
+        public static final int player1=0x7f090007;
+        public static final int player2=0x7f090004;
+        public static final int player3=0x7f090006;
+        public static final int player4=0x7f090008;
+        public static final int submit=0x7f090009;
     }
     public static final class layout {
         public static final int activity_input=0x7f030000;
-        public static final int fragment_input_dummy=0x7f030001;
+        public static final int activity_menu=0x7f030001;
+        public static final int fragment_input_dummy=0x7f030002;
+        public static final int fragment_menu=0x7f030003;
     }
     public static final class menu {
         public static final int input=0x7f080000;
+        public static final int menu=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int title_section1=0x7f050002;
-        public static final int title_section2=0x7f050003;
-        public static final int title_section3=0x7f050004;
+        public static final int hello_world=0x7f050003;
+        public static final int title_activity_menu=0x7f050002;
     }
     public static final class style {
         /** 
