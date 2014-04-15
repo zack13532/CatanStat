@@ -1,6 +1,7 @@
 package com.example.catanstat;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Hex implements Comparable {
 
@@ -43,5 +44,15 @@ public class Hex implements Comparable {
 		
 		return this.number - h.number;
 	} //end compareTo method
+	
+	/**
+	 * @description Updates players' StatMatrix objects if the dice roll would
+	 * 				cause this hex to distribute resources
+	 */
+	public void giveResources() {
+		
+		for(Map.Entry<Player, Integer> e : settlers.entrySet())
+			;
+	}
 	
 }

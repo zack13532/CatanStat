@@ -105,4 +105,14 @@ public class TurnStat {
 		return statArray[KNIGHTS_IDX] != 0;
 	} //end getKnightUsed method
 	
+	/**
+	 * 
+	 * @param res Resource type to add
+	 * @param amount Amount of resource to add
+	 */
+	public void addResource(Resource res, int amount) {
+		
+		statArray[res.ordinal()] += amount;
+	} //end addResource method
+	
 } //end TurnStat class

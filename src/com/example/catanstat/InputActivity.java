@@ -3,21 +3,10 @@ package com.example.catanstat;
 import java.util.Locale;
 import java.util.Vector;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,14 +23,11 @@ public class InputActivity extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_input);
-		Intent intent = getIntent();
+		
+		getFragmentManager().beginTransaction().add(R.id.container, new InputFragment()).commit();
 	}
 
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment implements OnItemSelectedListener {
+	public static class InputFragment extends Fragment {
 		
 		/**
 		 * The fragment argument representing the section number for this
@@ -55,23 +41,24 @@ public class InputActivity extends FragmentActivity{
 		private Vector<Integer> diceRollHist;
 		private Spinner diceSpinner;
 		
-		public DummySectionFragment() {
-		}
-
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			
+			View rootView = inflater.inflate(R.layout.fragment_input,
+					container, false);
+
 			turnNum = 1;
 			
-			View rootView = inflater.inflate(R.layout.fragment_input_dummy,
-					container, false);
 			diceSpinner = (Spinner) rootView.findViewById(R.id.dicespinner);
+			
 			// Create an ArrayAdapter using the string array and a default spinner layout
-			ArrayAdapter<CharSequence> diceSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.dicerolls,
-					android.R.layout.simple_spinner_item);
+			ArrayAdapter<CharSequence> diceSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+					R.array.dicerolls, android.R.layout.simple_spinner_item);
+			
 			// Specify the layout to use when the list of choices appears
 			diceSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			
 			// Apply the adapter to the spinner
 			diceSpinner.setAdapter(diceSpinnerAdapter);
 
@@ -80,18 +67,31 @@ public class InputActivity extends FragmentActivity{
 			
 			Button submitButt = (Button) rootView.findViewById(R.id.submitbutt);
 			
+			submitButt.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v){
+					submitTurn(v);
+				}
+			});
+			
 			//change this so it references a global constant variable instead of 20
 			diceRollHist = new Vector<Integer>(20);
 			
 			// Set Item Listener
-			diceSpinner.setOnItemSelectedListener(this);
+			diceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> p, View v, int pos, long i){
+					setSpinnerSelection(p, v, pos, i);
+				}
+				public void onNothingSelected(AdapterView<?> p){
+					doNothing(p);
+				}
+			});
 			
 			return rootView;
 		}
 
 		
 		//called when the user clicks the Submit button
-		public void submitTurn(){
+		public void submitTurn(View v){
 			
 			diceRollHist.add(diceSpinner.getSelectedItemPosition()+2);
 			
@@ -99,15 +99,13 @@ public class InputActivity extends FragmentActivity{
 			turnDisp.setText("Turn " + turnNum);
 		}
 		
-		@Override
-		public void onItemSelected(AdapterView<?> parent, View view,
+		public void setSpinnerSelection(AdapterView<?> parent, View view,
 				int position, long id) {
 			parent.setSelection(position);
 			
 		}
 
-		@Override
-		public void onNothingSelected(AdapterView<?> parent) {
+		public void doNothing(AdapterView<?> parent) {
 			// Do nothing
 		}
 	}

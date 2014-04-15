@@ -18,13 +18,17 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.catanstat.InputActivity"
-            android:label="@string/title_activity_menu" >
+            android:label="@string/title_activity_input"
+            android:parentActivityName="com.example.catanstat.MenuActivity" >
+
+            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.example.catanstat.MenuActivity" />
         </activity>
     </application>
 

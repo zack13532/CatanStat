@@ -6,44 +6,40 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.catanstat.MenuActivity$PlaceholderFragment" >
+    tools:context="com.example.catanstat.MenuActivity$PMenuFragment" >
 
+    <EditText
+        android:id="@+id/player1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
+    
     <EditText
         android:id="@+id/player2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
-        android:ems="10" />
+        android:layout_below="@+id/player1"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/player3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:ems="10" />
-
-    <EditText
-        android:id="@+id/player1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/player3"
-        android:layout_alignLeft="@+id/player3"
-        android:layout_marginBottom="41dp"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
+        android:layout_below="@+id/player2"
+        android:ems="10"
+        android:inputType="textPersonName" />
+    
     <EditText
         android:id="@+id/player4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/player3"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/player3"
-        android:layout_marginTop="34dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -54,9 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
-        android:onClick="sendMessage"
-        android:text="Button" />
+        android:text="Button"
+        android:onClick="buttonClicked" />
     
-    
-
 </RelativeLayout>

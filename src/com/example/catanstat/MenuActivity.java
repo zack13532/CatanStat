@@ -2,8 +2,6 @@ package com.example.catanstat;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,28 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.os.Build;
 
 public class MenuActivity extends FragmentActivity {
 
-	static PlayerList playerList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		
-		playerList = new PlayerList();
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+					.add(R.id.container, new MenuFragment()).commit();
 			
 		}
-	}
-	
-	public void sendMessage(View view) 
-	{
-	    Intent intent = new Intent(MenuActivity.this, InputActivity.class);
-	    startActivity(intent);
 	}
 	
 	@Override
@@ -59,25 +48,22 @@ public class MenuActivity extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
+	public static class MenuFragment extends Fragment {
 
+		static PlayerList playerList;
+		
 		EditText entryOne;
 		EditText entryTwo;
 		EditText entryThree;
 		EditText entryFour;
 		
-		public PlaceholderFragment() {
-		}
-
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_menu, container,
 					false);
-			
+
 			//textfields
 			entryOne = (EditText) view.findViewById(R.id.player1);
 			entryTwo = (EditText) view.findViewById(R.id.player2);
@@ -95,7 +81,6 @@ public class MenuActivity extends FragmentActivity {
 	               
 	            	/* sends action when button is clicked */
 	            	buttonClicked(v);
-
 	            }
 	        });
 	        
@@ -106,28 +91,35 @@ public class MenuActivity extends FragmentActivity {
 		// using the text field data as name of players
 		public void buttonClicked (View view) {
 			
+			
 			String p1_name = entryOne.getText().toString();
 			String p2_name = entryTwo.getText().toString();
 			String p3_name = entryThree.getText().toString();
 			String p4_name = entryFour.getText().toString();
 			
+			playerList = PlayerList.getInstance();
+			
 			playerList.addPlayer(p1_name);
 			playerList.addPlayer(p2_name);
 			playerList.addPlayer(p3_name);
 			playerList.addPlayer(p4_name);
-			
+
+    	    Intent intent = new Intent(getActivity(), InputActivity.class);
+    	    getActivity().startActivity(intent);
 		}
+		
 	}
 
 	public static class PlayerList {
 		   private static PlayerList instance = null;
-		   private ArrayList<Player>players;
+		   private static ArrayList<Player>players;
 		   protected PlayerList() {
 		      // Exists only to defeat instantiation.
 		   }
 		   public static PlayerList getInstance() {
 		      if(instance == null) {
 		         instance = new PlayerList();
+		         players = new ArrayList<Player>(4);
 		      }
 		      return instance;
 		   }

@@ -18,7 +18,7 @@
         <item>12</item>
     </string-array>
 
-    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_input">InputActivity</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

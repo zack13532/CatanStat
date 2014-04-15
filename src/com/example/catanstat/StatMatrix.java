@@ -50,4 +50,15 @@ public class StatMatrix extends Vector<TurnStat> {
 		
 		return total;
 	} //end getTotalResources method
+	
+	/**
+	 * 
+	 * @param res Resource type to add
+	 * @param amount Amount of resource to add
+	 */
+	public void addResource(Resource res, int amount) {
+		
+		this.lastElement().addResource(res, amount);
+	} //end addResource method
+	
 } //end StatMatrix class
