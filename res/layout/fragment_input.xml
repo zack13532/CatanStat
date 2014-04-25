@@ -8,19 +8,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.catanstat.InputActivity$InputFragment" >
 
-    <Spinner
-        android:id="@+id/dicespinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp" />
-
     <TextView
         android:id="@+id/turndisp"
         android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Turn 0" />
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <Spinner
+        android:id="@+id/dicespinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/turndisp"
+        android:layout_below="@+id/turndisp" />
+
+    <Spinner
+        android:id="@+id/dicespinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dicespinner1"
+        android:layout_toRightOf="@+id/dicespinner1" />
 
     <Button
         android:id="@+id/submitbutt"
@@ -29,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:text="Submit" 
-        android:onClick="submitTurn" />
-    
+        android:onClick="submitTurn"
+        android:text="@string/submit" />
+
 </RelativeLayout>

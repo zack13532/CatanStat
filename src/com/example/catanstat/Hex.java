@@ -1,44 +1,58 @@
 package com.example.catanstat;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class Hex implements Comparable {
+public class Hex implements Comparable<Hex> {
 
 	private boolean blocked; //true if a knight is one this space
 	private int number; //dice roll number assigned to this space
 	private Resource res_type; //the resource this hex contains
-	private HashMap<Player, Integer> settlers; //players with settlements on the hex
-										   //mapping to 1 or 2 depending on if
-										   //if it's a settlement or city
+	private Vertex[] vertices; //vertices at the corner of the hex
+	private Edge[] edges; //edges of the hex
+	
+	//location in Hex matrix
+	private int x;
+	private int y;
 	
 	/**
 	 * @description default constructor corresponds to a desert hex
 	 */
-	public Hex() {
+	public Hex(int x, int y) {
 		
+		this.x = x;
+		this.y = y;
 		blocked = true;
-		settlers = new HashMap<Player, Integer>(3);
 	} //end default constructor
 	
-	/**
-	 * 
-	 * @param resource_type Type of the resource on the hex
-	 * @param diceroll_number Number for dice roll associated with the hex
-	 */
-	public Hex(Resource resource_type, int diceroll_number) {
+	public void setVertices(Vertex[] vs){
 		
-		blocked = false;
+		vertices = vs;
+	}
+
+	public void setEdges(Edge[] es){
+		
+		edges = es;
+	}
+	
+	public void setBlocked(){
+		
+		blocked = true;
+	}
+	
+	public void setType(Resource resource_type){
+		
 		res_type = resource_type;
+	}
+
+	public void setDiceroll(int diceroll_number){
+		
 		number = diceroll_number;
-	} //end 2 param constructor
+	}
 	
 	/**
 	 * 
 	 * @param h The other hex object to compare to
 	 * @return The difference in dice roll numbers of the hexes
 	 */
-	public int compareTo(Object otherHex) {
+	public int compareTo(Hex otherHex) {
 		
 		Hex h = (Hex) otherHex;
 		
@@ -51,8 +65,10 @@ public class Hex implements Comparable {
 	 */
 	public void giveResources() {
 		
-		for(Map.Entry<Player, Integer> e : settlers.entrySet())
-			;
+		for(int i=0 ; i<6 ; i++){
+			
+			vertices[i].giveResource(res_type);
+		}
 	}
 	
 }

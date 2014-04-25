@@ -1,6 +1,5 @@
 package com.example.catanstat;
 
-import java.util.Locale;
 import java.util.Vector;
 
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,17 +27,11 @@ public class InputActivity extends FragmentActivity{
 
 	public static class InputFragment extends Fragment {
 		
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
 		//current turn number
 		private int turnNum;
 		private TextView turnDisp;
 		private Vector<Integer> diceRollHist;
-		private Spinner diceSpinner;
+		private Spinner diceSpinner1, diceSpinner2;
 		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,11 +41,21 @@ public class InputActivity extends FragmentActivity{
 					container, false);
 
 			turnNum = 1;
+
+			diceSpinner1 = (Spinner) rootView.findViewById(R.id.dicespinner1);
+			diceSpinner2 = (Spinner) rootView.findViewById(R.id.dicespinner2);
 			
-			diceSpinner = (Spinner) rootView.findViewById(R.id.dicespinner);
+			Integer[] diceRes = {R.drawable.dice1,R.drawable.dice2,R.drawable.dice3,
+					R.drawable.dice4,R.drawable.dice5,R.drawable.dice6};
+			
+			SimpleImageArrayAdapter diceSpinnerAdapter1 = new SimpleImageArrayAdapter(getActivity(), diceRes);
+			diceSpinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+			SimpleImageArrayAdapter diceSpinnerAdapter2 = new SimpleImageArrayAdapter(getActivity(), diceRes);
+			diceSpinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			
 			// Create an ArrayAdapter using the string array and a default spinner layout
-			ArrayAdapter<CharSequence> diceSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+			/*ArrayAdapter<CharSequence> diceSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
 					R.array.dicerolls, android.R.layout.simple_spinner_item);
 			
 			// Specify the layout to use when the list of choices appears
@@ -61,6 +63,10 @@ public class InputActivity extends FragmentActivity{
 			
 			// Apply the adapter to the spinner
 			diceSpinner.setAdapter(diceSpinnerAdapter);
+			*/
+			
+			diceSpinner1.setAdapter(diceSpinnerAdapter1);
+			diceSpinner2.setAdapter(diceSpinnerAdapter2);
 
 			turnDisp = (TextView) rootView.findViewById(R.id.turndisp);
 			turnDisp.setText("Turn " + turnNum);
@@ -73,30 +79,36 @@ public class InputActivity extends FragmentActivity{
 				}
 			});
 			
-			//change this so it references a global constant variable instead of 20
-			diceRollHist = new Vector<Integer>(20);
-			
-			// Set Item Listener
-			diceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			//create generic spinner listener
+			OnItemSelectedListener spinListen = new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> p, View v, int pos, long i){
 					setSpinnerSelection(p, v, pos, i);
 				}
 				public void onNothingSelected(AdapterView<?> p){
 					doNothing(p);
 				}
-			});
+			};
+			
+			// Set Item Listeners
+			diceSpinner1.setOnItemSelectedListener(spinListen);
+			diceSpinner2.setOnItemSelectedListener(spinListen);
+
+			//change this so it references a global constant variable instead of 20
+			diceRollHist = new Vector<Integer>(20);
 			
 			return rootView;
 		}
-
 		
 		//called when the user clicks the Submit button
 		public void submitTurn(View v){
 			
-			diceRollHist.add(diceSpinner.getSelectedItemPosition()+2);
+			int roll = diceSpinner1.getSelectedItemPosition() +
+					   diceSpinner2.getSelectedItemPosition() + 2;
+			
+			diceRollHist.add(roll);
 			
 			turnNum++;
-			turnDisp.setText("Turn " + turnNum);
+			turnDisp.setText("Turn " + turnNum + "\nLast Roll: " + roll);
 		}
 		
 		public void setSpinnerSelection(AdapterView<?> parent, View view,
@@ -106,9 +118,9 @@ public class InputActivity extends FragmentActivity{
 		}
 
 		public void doNothing(AdapterView<?> parent) {
-			// Do nothing
+			// Do nothing CAUSE ZACK IS GAY
 		}
+		
 	}
-
-
+	
 }
